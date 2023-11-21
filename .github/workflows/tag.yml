@@ -1,0 +1,22 @@
+name: Tag
+on:
+  push:
+    branches: [main]
+    tags:
+      - "@hello/**"
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/main') && startsWith(github.ref, 'refs/tags/@hello/')
+    steps:
+      - run: echo hello
+  hello-starts-with-main:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/main')
+    steps:
+      - run: echo hello
+  hello-starts-with-tag:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/@hello/')
+    steps:
+      - run: echo hello
